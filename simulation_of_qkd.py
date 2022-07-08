@@ -40,7 +40,18 @@ RANDOM_BIT_STRING = np.load("random_armonk_4000.npy")
 # a) count number of zeros and ones should be greater than 0.95
 
 
-def bits_count(bit_string):
+def bits_count(bit_string: np.ndarray):
+    """calculates the number of 0's and 1's in the random bit array
+
+    parameters:
+        bit_string : generated random bit array
+
+    returns:
+        count_ratios : fraction of number of 0's and total length
+                       fraction of number of 1's and total length
+                       fraction of number of 0's and number of 1's
+    """
+
     count_0 = 0
     count_1 = 0
     length = len(bit_string)
@@ -51,7 +62,8 @@ def bits_count(bit_string):
             count_1 = count_1 + 1
     if 1.05 > count_0 / count_1 > 0.95:
         print(True)
-    return [count_0 / length, count_1 / length, np.round(count_0 / count_1, 3)]
+    count_ratios = [count_0 / length, count_1 / length, np.round(count_0 / count_1, 3)]
+    return count_ratios
 
 
 bits_count(RANDOM_BIT_STRING)
